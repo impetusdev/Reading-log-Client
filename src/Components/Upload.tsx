@@ -11,7 +11,7 @@ interface File {
 }
 
 
-export const Main = () => {
+export const Upload = () => {
     const [numPages, setNumPages] = useState<number | null> (null);
     const [pageNumber, setPageNumber] = useState<number> (1);
 
