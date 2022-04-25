@@ -10,6 +10,7 @@ export const Text = () => {
         setTextSnippet(e.target.value.trim());
     }
     
+    // TODO: use this website: https://www.smashingmagazine.com/2020/07/react-apps-testing-library/
     // count how many words are in the text. 
     const analyseText = () => { 
         if (textSnippet.trim() === ''){
@@ -18,7 +19,7 @@ export const Text = () => {
             setWordCount(textSnippet.split(' ').length);
         }
     }
-    
+
     return <div className="section">
         <h2>Input your text below</h2>
         <textarea onChange={updateText}/>
