@@ -26,7 +26,7 @@ export const ActivePassage = ({passage}: any) => {
 
     const submit = () => {
         setWpm(60 * passage.wordCount/ time);
-        //TODO: put in the submission times. 
+        //TODO: get time submissions working. 
     }
   
     return (
