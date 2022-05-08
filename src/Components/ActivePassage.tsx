@@ -3,7 +3,11 @@ import './ActivePassage.scss';
 
 import {Passage} from './Read';
 
-export const ActivePassage = ({passage}: any) => {
+type AppProps = {
+    passage: Passage;
+};
+
+export const ActivePassage = ({passage}: AppProps): JSX.Element => {
     
     const [timerStarted, setTimerStarted] = useState<boolean>(false);
     const [timerIntervalId, setTimerIntervalId] = useState<any | null>(null); //TODO: get the type correct on this. 

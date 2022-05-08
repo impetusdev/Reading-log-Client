@@ -10,10 +10,12 @@ export interface Passage {
     createdOn: string,
     source: string,
     author: string, 
+    wordCount: number,
+    complexity: number,
     _v: number
 }
 
-export const Read = () => {
+export const Read = (): JSX.Element => {
     const [passages, setPassages] = useState<Passage[] | null>(null);
     const [activePassage, setActivePassage] = useState<Passage | null>(null);
     // perform the axios call to pick a passage

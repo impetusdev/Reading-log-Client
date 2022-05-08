@@ -10,7 +10,7 @@ interface AllText {
     _v: number
 }
 
-export const Text = () => {
+export const Text = (): JSX.Element => {
     const [textSnippet, setTextSnippet] = useState<string>('');
     const [wordCount, setWordCount] = useState<number>(0);
     const [allText, setAllText] = useState<AllText[]>([]);
