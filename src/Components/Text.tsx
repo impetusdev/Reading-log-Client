@@ -25,7 +25,6 @@ export const Text = () => {
     const getText = async () => { 
         try {
             let res = await axios.get('http://localhost:3000/text')
-            console.log('data is:', res.data);
 
             setAllText(res.data);
         } catch (error) {
