@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import { useState} from "react";
 import './ActivePassage.scss';
 
 import {Passage} from './Read';
@@ -41,7 +41,7 @@ export const ActivePassage = ({passage}: AppProps): JSX.Element => {
             <p>{wpm} Words per Minute</p>
             <p className="difficulty">Difficulty: {passage.complexity}</p>
             
-            <p>{time.toFixed(1)}</p>
+            <p>{time.toFixed(0)}s</p>
             {
                 timerStarted ? 
                     <button onClick={stopTimer}>Pause</button> 
