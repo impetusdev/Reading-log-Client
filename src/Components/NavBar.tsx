@@ -11,6 +11,8 @@ export const NavBar = (): JSX.Element => {
             <li><Link to='/'><span>Dashboard</span></Link></li>
             <li><Link to='/all'><span>Read</span></Link></li>
             <li><Link to='/'><span>Upload</span></Link></li>
+            <li><Link to='/signin'><span>SignIn</span></Link></li>
+            <li><Link to='/signup'><span>SignUp</span></Link></li>
         </ul>
     )
 }
