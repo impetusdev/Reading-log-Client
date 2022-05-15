@@ -21,9 +21,6 @@ export const SignIn = (): JSX.Element => {
 
         if(response){
             setUser(response.data);
-            // debugger; 
-            console.log(user);
-            console.log(response)
         }
     }
 

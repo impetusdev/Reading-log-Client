@@ -1,12 +1,12 @@
 
-import React, {useState, useContext} from "react";
+import { useContext} from "react";
 import { Link } from 'react-router-dom';
 import { UserContext } from "./UserContext";
 
 import './NavBar.scss';
 
 export const NavBar = (): JSX.Element => {
-    const {user} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
     // TODO: correct the link to dashboard eventually
     return (
         <ul role="navigation">
@@ -17,8 +17,9 @@ export const NavBar = (): JSX.Element => {
                 !user ? <>
                     <li><Link to='/signin'><span>SignIn</span></Link></li>
                     <li><Link to='/signup'><span>SignUp</span></Link></li>
-                </> : 
-                <li><span>Welcome {user.username}</span></li>
+                </> 
+                : 
+                <li><Link to='/signin'><span onClick={() => setUser(null)}>Logout</span></Link></li> 
             }
         </ul>
     )
