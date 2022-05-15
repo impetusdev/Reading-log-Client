@@ -1,8 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,600;1,700&display=swap');
-.container {
+.list-container {
     padding: 2%;
     background-color: white;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+}
+
+#sign {
+    text-decoration: underline;
 }
 
 label {

@@ -2,6 +2,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import './Signup.scss';
+import { Link } from 'react-router-dom';
 
 
 export const SignUp = (): JSX.Element => {
@@ -20,14 +21,20 @@ export const SignUp = (): JSX.Element => {
     }
 
     return (
-        <div className="container">
+        <div className="list-container">
             <form onSubmit={handleSubmit}>
-                    <label>Email</label>
-                    <input type="text" onChange={(e) => setEmail(e.target.value)} value="laurence.qi@outlook.com"/>
-                    <label>Password</label>
-                    <input type="password" onChange={(e) => setPassword(e.target.value)} value="chicken"/>
+                    <div className="input-container">
+                        <label>Email</label>
+                        <input type="text" onChange={(e) => setEmail(e.target.value)} value="laurence.qi@outlook.com"/>
+                    </div>
+                    <div className="input-container">
+                        <label>Password</label>
+                        <input type="password" onChange={(e) => setPassword(e.target.value)} value="chicken"/>
+                    </div>
                     <input type="submit" />
+                    <p>Already have an account?</p>
+                    <Link to='/signin'><p id="sign">SignIn</p></Link>
             </form>
         </div>
-    )
+    ) 
 }
