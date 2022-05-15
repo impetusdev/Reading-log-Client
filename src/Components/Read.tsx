@@ -41,8 +41,6 @@ export const Read = (): JSX.Element => {
 
     }
 
-    // TODO: make a component called activePassage
-    
     return (
         <div>
             {
