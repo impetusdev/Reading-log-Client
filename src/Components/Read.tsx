@@ -47,15 +47,15 @@ export const Read = (): JSX.Element => {
         <div>
             {
                 activePassage ? 
-                    <ActivePassage passage={activePassage}/>: 
-                        passages ? passages.map(passage => {
+                    <ActivePassage passage={activePassage}/> : 
+                        passages && passages.map(passage => {
                             return <div key={passage._id} className="passage">
                                 <h2>{passage.source}</h2>
                                 <h3>{passage.author}</h3>
                                 <p>{passage.text.substring(0, 200)}... </p>
                                 <button onClick={() => displayPassage(passage)}>continue</button>
                             </div>
-                        }) : ''
+                        })
             }
         </div>
     )

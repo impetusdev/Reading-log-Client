@@ -34,7 +34,7 @@ export const ActivePassage = ({passage}: AppProps): JSX.Element => {
     }
   
     return (
-        passage ? <div className="passage">
+        passage && <div className="passage">
             <h2>{passage.source}</h2>
             <h3>{passage.author}</h3>
             <p className="text">{passage.text}</p>
@@ -50,6 +50,5 @@ export const ActivePassage = ({passage}: AppProps): JSX.Element => {
             }
             <button onClick={submit} disabled={time === 0 ? true : false}>Submit Time</button>
         </div>
-        : <></>
     )
 }

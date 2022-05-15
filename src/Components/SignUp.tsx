@@ -1,4 +1,3 @@
-
 import React, {useState} from "react";
 import axios from "axios";
 import './Signup.scss';
@@ -36,5 +35,5 @@ export const SignUp = (): JSX.Element => {
                     <Link to='/signin'><p id="sign">SignIn</p></Link>
             </form>
         </div>
-    ) 
+    )
 }
