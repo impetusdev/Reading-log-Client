@@ -1,6 +1,5 @@
 import { useState} from "react";
 import './ActivePassage.scss';
-
 import {Passage} from './Read';
 
 type AppProps = {
@@ -32,7 +31,7 @@ export const ActivePassage = ({passage}: AppProps): JSX.Element => {
         setWpm(60 * passage.wordCount/ time);
         //TODO: get time submissions working. 
     }
-  
+
     return (
         passage && <div className="passage">
             <h2>{passage.source}</h2>

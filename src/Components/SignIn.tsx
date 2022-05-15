@@ -1,12 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import axios from "axios";
 import './Signup.scss';
 import { Link } from 'react-router-dom';
+import { UserContext } from "./UserContext";
 
 
-export const SignUp = (): JSX.Element => {
+export const SignIn = (): JSX.Element => {
     const [email, setEmail] = useState<string>('laurence.qi@outlook.com');
     const [password, setPassword] = useState<string>('chicken');
+    const {user, setUser} = useContext(UserContext);
+    // check if user is present if not then login. 
 
     const handleSubmit = async (event: React.SyntheticEvent) => {
         // performs the axios request
@@ -16,7 +19,12 @@ export const SignUp = (): JSX.Element => {
             password
         });
 
-        console.log(response) //TODO: set this token in the auth context. 
+        if(response){
+            setUser(response.data);
+            // debugger; 
+            console.log(user);
+            console.log(response)
+        }
     }
 
     return (
