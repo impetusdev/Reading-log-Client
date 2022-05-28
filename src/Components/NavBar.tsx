@@ -8,6 +8,8 @@ import './NavBar.scss';
 export const NavBar = (): JSX.Element => {
     const {user, setUser} = useContext(UserContext);
     // TODO: correct the link to dashboard eventually
+
+    console.log('user from Nav:', user)
     return (
         <ul role="navigation">
             <li><Link to='/'><span>Dashboard</span></Link></li>

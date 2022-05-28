@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useState} from "react";
 import './ActivePassage.scss';
-import {Passage} from './Read';
+import { Passage } from './Read';
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
+
 
 type AppProps = {
     passage: Passage;
@@ -11,8 +14,9 @@ export const ActivePassage = ({passage}: AppProps): JSX.Element => {
     
     const [timerStarted, setTimerStarted] = useState<boolean>(false);
     const [timerIntervalId, setTimerIntervalId] = useState<any | null>(null); //TODO: get the type correct on this. 
-    const [time, setTime] = useState<number>(0); // unit: seconds
+    const [timeTaken, setTimeTaken] = useState<number>(0); // unit: seconds
     const [wpm, setWpm] = useState<number>(0);
+    
     
     const startTimer = () => {
         setTimerStarted(true);
@@ -21,7 +25,7 @@ export const ActivePassage = ({passage}: AppProps): JSX.Element => {
 
         // set the interval that repeats the call back function once every period
         const intervalId = setInterval(() => {
-            setTime(time => Math.round((time + period / 1000)* frequency ) / frequency); // increments the "time" value in seconds
+            setTimeTaken(timeTaken => Math.round((timeTaken + period / 1000)* frequency ) / frequency); // increments the "timeTaken" value in seconds
         }, period);
 
         setTimerIntervalId(intervalId);
@@ -33,18 +37,20 @@ export const ActivePassage = ({passage}: AppProps): JSX.Element => {
         clearInterval(timerIntervalId);
     }
 
-    const submit = () => {
-        let wordPerMinute = 60 * passage.wordCount/ time;
+    const submit = async () => {
+        let wordPerMinute = 60 * passage.wordCount/ timeTaken;
         let roundedWpm = Math.round( wordPerMinute * 100) / 100;
         setWpm(roundedWpm);
-        //TODO: get time submissions working.
+        //TODO: get timeTaken submissions working.
 
-        axios.post("http://localhost:3000/login", {
-            time, 
+        await axios.post("http://localhost:3000/reading", {
+            timeTaken, 
             wpm, 
             id: passage._id
-        })
-        // develop the endpoint to recieve reading time and speed. 
+        });
+
+        //TODO: attach the header to the post request. 
+        // develop the endpoint to recieve reading timeTaken and speed. 
     }
 
     return (
@@ -55,14 +61,14 @@ export const ActivePassage = ({passage}: AppProps): JSX.Element => {
             <p>{wpm} Words per Minute</p>
             <p className="difficulty">Difficulty: {passage.complexity}</p>
             
-            <p>{time.toFixed(1)}s</p>
+            <p>{timeTaken.toFixed(1)}s</p>
             {
                 timerStarted ? 
                     <button onClick={stopTimer}>Pause</button> 
                     :
                     <button onClick={startTimer}>Start Reading</button>
             }
-            <button onClick={submit} disabled={time === 0 ? true : false}>Submit Time</button>
+            <button onClick={submit} disabled={timeTaken === 0 ? true : false}>Submit timeTaken</button>
         </div>
     )
 }
