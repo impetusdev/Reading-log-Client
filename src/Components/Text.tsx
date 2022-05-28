@@ -11,25 +11,17 @@ interface AllText {
 
 export const Text = (): JSX.Element => {
     const [textSnippet, setTextSnippet] = useState<string>('');
+    const [author, setAuthor] = useState<string>('');
+    const [source, setSource] = useState<string>('');
+
     const [wordCount, setWordCount] = useState<number>(0);
-    const [allText, setAllText] = useState<AllText[]>([]);
 
     const updateText = (e:any) => {
         setTextSnippet(e.target.value.trim());
     }
-    
     // TODO: use this website: https://www.smashingmagazine.com/2020/07/react-apps-testing-library/
 
 
-    const getText = async () => { 
-        try {
-            let res = await axios.get('http://localhost:3000/text')
-
-            setAllText(res.data);
-        } catch (error) {
-            console.log("Error:", error)
-        }    
-    }
     const uploadText = async () => { 
         try {
             let res = await axios.post('http://localhost:3000/text', {
@@ -52,16 +44,23 @@ export const Text = (): JSX.Element => {
 
     return <div className="section">
         <h2>Input your text below</h2>
-        <textarea onChange={updateText}/>
+        <div className="input-container">
+            <label>Input Text: </label>
+            <textarea onChange={updateText}/>
+        </div>
+        <div className="input-container">
+            <label>Author: </label>
+            <input onChange={(e) => setAuthor(e.target.value)}/>
+        </div>
+        <div className="input-container">
+            <label>Source: </label>
+            <input onChange={(e) => setSource(e.target.value)}/>
+        </div>
+        
         <p>{textSnippet}</p>
-        <button onClick={getText}>Get the text</button>
         <button onClick={uploadText}>Upload the text file</button>
         <button onClick={analyseText}>Analyse</button>
         <p>{`word count: ${wordCount}`}</p>
 
-
-        {
-            allText.map((snippet) => <p key={snippet._id}>{snippet.text}</p>)
-        }
     </div>;
 }

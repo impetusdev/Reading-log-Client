@@ -6,30 +6,43 @@ type AppProps = {
     passage: Passage;
 };
 
+
 export const ActivePassage = ({passage}: AppProps): JSX.Element => {
     
     const [timerStarted, setTimerStarted] = useState<boolean>(false);
     const [timerIntervalId, setTimerIntervalId] = useState<any | null>(null); //TODO: get the type correct on this. 
-    const [time, setTime] = useState<number>(0);
+    const [time, setTime] = useState<number>(0); // unit: seconds
     const [wpm, setWpm] = useState<number>(0);
     
     const startTimer = () => {
         setTimerStarted(true);
+        const period = 100; // this is in ms
+        const frequency  = 1000 / period; 
+
+        //TODO: make a helper function that can be extracted for testing. 
+
+        // set the interval that repeats the call back function once every period
         const intervalId = setInterval(() => {
-            setTime(time => Math.round((time + 0.1)*10)/10);
-        }, 100);
-        setTimerIntervalId(intervalId)
+            // add the increment of period => 
+            setTime(time => Math.round((time + period / 1000 ) * frequency) / frequency); // increments the "time" value in seconds
+        }, period);
+
+        setTimerIntervalId(intervalId);
     }
+
     const stopTimer = () => {
         setTimerStarted(false);
-        console.log('intervalId:', timerIntervalId)
+
         clearInterval(timerIntervalId);
-        
     }
 
     const submit = () => {
-        setWpm(60 * passage.wordCount/ time);
-        //TODO: get time submissions working. 
+        let wordPerMinute = 60 * passage.wordCount/ time;
+        let roundedWpm = Math.round( wordPerMinute * 100) / 100;
+        setWpm(roundedWpm);
+        //TODO: get time submissions working.
+
+        // develop the endpoint to recieve reading time and speed. 
     }
 
     return (
